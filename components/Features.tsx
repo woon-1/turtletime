@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Button from './Button'
 
 // Illustrated icon: Sound waves with bell
 const SoundWavesIcon = () => (
@@ -197,7 +198,11 @@ const ColorSwatch = ({
   </button>
 )
 
-export default function Features() {
+interface FeaturesProps {
+  onPreOrderClick?: () => void
+}
+
+export default function Features({ onPreOrderClick }: FeaturesProps) {
   const [selectedColor, setSelectedColor] = useState('sage')
 
   const features = [
@@ -219,7 +224,7 @@ export default function Features() {
     {
       icon: <PhoneLockIcon />,
       title: 'Bricks Your Phone',
-      description: 'Pair with any app blocker to lock your phone until TurtleTime says it\'s morning.',
+      description: 'Helps you put your phone away until morning. Out of sight, out of mind.',
     },
   ]
 
@@ -283,6 +288,15 @@ export default function Features() {
                 ))}
               </div>
             </div>
+
+            {/* Inline CTA */}
+            {onPreOrderClick && (
+              <div className="mt-8">
+                <Button variant="primary" size="md" onClick={onPreOrderClick}>
+                  Get TurtleTime — $49
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

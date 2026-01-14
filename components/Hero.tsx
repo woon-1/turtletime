@@ -81,13 +81,13 @@ export default function Hero({ onPreOrderClick }: HeroProps) {
           {/* Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-sage-100">
+            <div className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-terra-200">
               <span className="flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-sage-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-sage-500"></span>
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-terra-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-terra-500"></span>
               </span>
-              <span className="text-sage-700 text-sm font-medium">
-                Join 2,000+ people reclaiming their mornings
+              <span className="text-terra-700 text-sm font-medium">
+                Limited first batch — 847 of 1,000 claimed
               </span>
             </div>
 
@@ -118,9 +118,14 @@ export default function Hero({ onPreOrderClick }: HeroProps) {
             </p>
 
             {/* CTA Button */}
-            <Button variant="primary" size="lg" onClick={onPreOrderClick}>
-              Pre-order Now — $49
-            </Button>
+            <div className="space-y-3">
+              <Button variant="primary" size="lg" onClick={onPreOrderClick}>
+                Pre-order Now — $49
+              </Button>
+              <p className="text-sm text-ink-muted">
+                No payment until we ship • Cancel anytime
+              </p>
+            </div>
 
             {/* Trust line */}
             <div className="mt-6 flex items-center gap-6 justify-center lg:justify-start text-sm text-ink-muted">
@@ -134,7 +139,7 @@ export default function Hero({ onPreOrderClick }: HeroProps) {
                 <svg className="w-4 h-4 text-sage-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                30-day guarantee
+                Free US shipping
               </span>
             </div>
           </div>

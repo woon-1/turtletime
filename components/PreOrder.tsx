@@ -132,28 +132,35 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
             {' '}Today
           </h2>
 
-          <p className="text-lg text-ink-muted max-w-xl mx-auto mb-8">
+          <p className="text-lg text-ink-muted max-w-xl mx-auto mb-10">
             Be among the first to experience mornings without the scroll.
           </p>
 
-          {/* Testimonial */}
-          <Testimonial />
-
-          {/* Stats Bar */}
-          <StatsBar />
-
           {/* Pricing Card */}
           <div className="relative bg-white rounded-[2rem] p-8 card-soft max-w-md mx-auto">
-            <h3 className="font-display text-xl font-bold text-ink mb-2">
+            {/* Early bird badge */}
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-terra-500 text-white text-sm font-medium rounded-full shadow-md">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                Early Bird — Save $10
+              </span>
+            </div>
+
+            <h3 className="font-display text-xl font-bold text-ink mb-2 mt-2">
               TurtleTime Alarm Clock
             </h3>
 
             {/* Pricing */}
-            <div className="mb-8">
+            <div className="mb-2">
               <span className="text-ink-muted line-through text-lg">$59</span>
               <span className="font-display text-5xl font-bold text-ink ml-3">$49</span>
               <span className="text-ink-muted text-sm ml-1">USD</span>
             </div>
+
+            {/* Scarcity indicator */}
+            <p className="text-terra-600 text-sm font-medium mb-6">
+              Only 153 left at this price
+            </p>
 
             {/* Included items */}
             <ul className="text-left space-y-3 mb-8">
@@ -173,8 +180,14 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
             </p>
           </div>
 
+          {/* Testimonial - moved below pricing for social proof at decision point */}
+          <Testimonial />
+
+          {/* Stats Bar */}
+          <StatsBar />
+
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mt-10">
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10">
             <TrustBadge icon="🔒" text="Secure Checkout" />
             <TrustBadge icon="💳" text="All Major Cards" />
             <TrustBadge icon="↩️" text="30-Day Returns" />
