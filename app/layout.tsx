@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter, Outfit } from 'next/font/google'
+import { Comfortaa, Nunito } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+const comfortaa = Comfortaa({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-comfortaa',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
-const outfit = Outfit({
+const nunito = Nunito({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-nunito',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -29,8 +31,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`${comfortaa.variable} ${nunito.variable}`}>
+      <body className="font-body antialiased bg-cream text-ink overflow-x-hidden">
+        {children}
+      </body>
     </html>
   )
 }

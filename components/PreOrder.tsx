@@ -9,6 +9,43 @@ interface PreOrderProps {
   onCloseModal: () => void
 }
 
+// Check item component
+const IncludedItem = ({ children }: { children: React.ReactNode }) => (
+  <li className="flex items-center gap-3">
+    <span className="flex-shrink-0 w-5 h-5 bg-sage-100 rounded-full flex items-center justify-center">
+      <svg className="w-3 h-3 text-sage-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+    <span className="text-ink-light text-sm">{children}</span>
+  </li>
+)
+
+// Trust badge component
+const TrustBadge = ({ icon, text }: { icon: string; text: string }) => (
+  <div className="flex items-center gap-2 text-ink-muted">
+    <span className="text-lg">{icon}</span>
+    <span className="text-sm">{text}</span>
+  </div>
+)
+
+// Mini turtle for pricing card
+const MiniTurtle = () => (
+  <svg viewBox="0 0 100 80" className="w-24 h-20" fill="none">
+    <ellipse cx="50" cy="45" rx="35" ry="25" className="fill-sage-400" />
+    <ellipse cx="50" cy="42" rx="28" ry="20" className="fill-sage-500" />
+    <ellipse cx="42" cy="38" rx="8" ry="5" className="fill-white opacity-20" />
+    <ellipse cx="78" cy="42" rx="12" ry="10" className="fill-sage-300" />
+    <circle cx="84" cy="39" r="3" className="fill-ink" />
+    <circle cx="85" cy="38" r="1" className="fill-white" />
+    <ellipse cx="82" cy="46" rx="3" ry="2" className="fill-terra-300 opacity-40" />
+    <path d="M80 47 Q84 50 88 48" stroke="#2D3032" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+    <ellipse cx="70" cy="60" rx="7" ry="4" className="fill-sage-300" transform="rotate(-10 70 60)" />
+    <ellipse cx="30" cy="58" rx="6" ry="4" className="fill-sage-300" transform="rotate(10 30 58)" />
+    <ellipse cx="22" cy="45" rx="5" ry="3" className="fill-sage-300" />
+  </svg>
+)
+
 export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: PreOrderProps) {
   const [checkoutStep, setCheckoutStep] = useState(1)
   const [email, setEmail] = useState('')
@@ -58,130 +95,139 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
     onCloseModal()
   }
 
+  const includedItems = [
+    'TurtleTime alarm clock',
+    'USB-C charging cable',
+    'Quick start guide',
+    '30-day money-back guarantee',
+    'Free shipping (US)',
+  ]
+
   return (
     <>
       {/* Pre-order Section */}
-      <section id="preorder" className="py-20 px-4 bg-gradient-to-b from-white to-turtle-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block mb-4 px-4 py-2 bg-coral-100 rounded-full">
-            <span className="text-coral-700 text-sm font-medium">
-              Limited Early Bird Pricing
-            </span>
-          </div>
+      <section id="preorder" className="relative py-24 px-4 bg-gradient-to-b from-cream-100 via-cream-50 to-sage-50 overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute top-20 left-0 w-72 h-72 bg-sage-100 rounded-full opacity-40 blur-3xl" />
+        <div className="absolute bottom-20 right-0 w-64 h-64 bg-terra-50 rounded-full opacity-30 blur-3xl" />
 
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-4">
-            Pre-order TurtleTime Today
+        <div className="relative max-w-4xl mx-auto text-center">
+          <span className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-terra-100 text-terra-700 rounded-full text-sm font-medium">
+            <span>🎉</span>
+            <span>Limited Early Bird Pricing</span>
+          </span>
+
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink mb-6">
+            Pre-order{' '}
+            <span className="relative inline-block">
+              <span className="text-sage-600">TurtleTime</span>
+              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
+                <path d="M0,4 Q50,0 100,4 T200,4" stroke="#b4cfa8" strokeWidth="3" fill="none" />
+              </svg>
+            </span>
+            {' '}Today
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+
+          <p className="text-lg text-ink-muted max-w-2xl mx-auto mb-12 leading-relaxed">
             Be among the first to experience mornings without the scroll.
             Pre-order now and save 20% off retail.
           </p>
 
           {/* Pricing Card */}
-          <div className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-md mx-auto">
-            <div className="text-6xl mb-4">🐢</div>
-            <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
+          <div className="relative bg-white rounded-[2rem] p-8 sm:p-10 card-soft max-w-md mx-auto">
+            {/* Decorative corner accent */}
+            <div className="absolute -top-6 -right-6 w-24 h-24 bg-sage-100 blob-shape opacity-60" />
+
+            {/* Mini turtle illustration */}
+            <div className="flex justify-center mb-4">
+              <MiniTurtle />
+            </div>
+
+            <h3 className="font-display text-2xl font-bold text-ink mb-2">
               TurtleTime Alarm Clock
             </h3>
 
-            <div className="mb-6">
-              <span className="text-gray-400 line-through text-lg">$59</span>
-              <span className="text-4xl font-bold text-charcoal ml-2">$49</span>
-              <span className="text-gray-500 text-sm ml-1">USD</span>
+            {/* Pricing */}
+            <div className="mb-8">
+              <span className="text-ink-muted line-through text-lg">$59</span>
+              <span className="font-display text-5xl font-bold text-ink ml-3">$49</span>
+              <span className="text-ink-muted text-sm ml-1">USD</span>
             </div>
 
+            {/* Included items */}
             <ul className="text-left space-y-3 mb-8">
-              <li className="flex items-center gap-2">
-                <span className="text-turtle-500">✓</span>
-                <span className="text-gray-700">TurtleTime alarm clock</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-turtle-500">✓</span>
-                <span className="text-gray-700">USB-C charging cable</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-turtle-500">✓</span>
-                <span className="text-gray-700">Quick start guide</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-turtle-500">✓</span>
-                <span className="text-gray-700">30-day money-back guarantee</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-turtle-500">✓</span>
-                <span className="text-gray-700">Free shipping (US)</span>
-              </li>
+              {includedItems.map((item, index) => (
+                <IncludedItem key={index}>{item}</IncludedItem>
+              ))}
             </ul>
 
+            {/* CTA Button */}
             <Button variant="primary" size="lg" onClick={onOpenModal} className="w-full">
               Pre-order Now — $49
             </Button>
 
-            <p className="text-sm text-gray-500 mt-4">
+            {/* Shipping note */}
+            <p className="text-sm text-ink-muted mt-4">
               Ships Spring 2025 • Cancel anytime before shipping
             </p>
           </div>
 
           {/* Trust Badges */}
-          <div className="flex justify-center items-center gap-8 mt-8 text-gray-400">
-            <div className="flex items-center gap-2">
-              <span>🔒</span>
-              <span className="text-sm">Secure Checkout</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>💳</span>
-              <span className="text-sm">All Major Cards</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>↩️</span>
-              <span className="text-sm">30-Day Returns</span>
-            </div>
+          <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 mt-10">
+            <TrustBadge icon="🔒" text="Secure Checkout" />
+            <TrustBadge icon="💳" text="All Major Cards" />
+            <TrustBadge icon="↩️" text="30-Day Returns" />
           </div>
         </div>
       </section>
 
       {/* Checkout Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[2rem] max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             {!isSubmitted ? (
               <>
                 {/* Modal Header */}
-                <div className="p-6 border-b border-gray-100">
+                <div className="p-6 border-b border-cream-200">
                   <div className="flex justify-between items-center">
                     <div>
-                      <h3 className="font-display text-xl font-bold text-charcoal">
+                      <h3 className="font-display text-xl font-bold text-ink">
                         {checkoutStep === 1 ? 'Shipping Information' : 'Payment Details'}
                       </h3>
-                      <p className="text-sm text-gray-500">Step {checkoutStep} of 2</p>
+                      <p className="text-sm text-ink-muted">Step {checkoutStep} of 2</p>
                     </div>
                     <button
                       onClick={resetModal}
-                      className="text-gray-400 hover:text-gray-600 text-2xl"
+                      className="w-10 h-10 flex items-center justify-center rounded-full bg-cream-100 text-ink-muted hover:bg-cream-200 hover:text-ink transition-colors"
                     >
-                      ×
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
                     </button>
                   </div>
+
                   {/* Progress bar */}
-                  <div className="mt-4 h-2 bg-gray-100 rounded-full">
+                  <div className="mt-4 h-2 bg-cream-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-turtle-500 rounded-full transition-all duration-300"
+                      className="h-full bg-gradient-to-r from-sage-400 to-sage-500 rounded-full transition-all duration-500 ease-out"
                       style={{ width: checkoutStep === 1 ? '50%' : '100%' }}
                     />
                   </div>
                 </div>
 
                 {/* Order Summary */}
-                <div className="px-6 py-4 bg-gray-50 border-b border-gray-100">
+                <div className="px-6 py-4 bg-cream-50 border-b border-cream-100">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                      <div className="text-3xl">🐢</div>
+                      <div className="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center">
+                        <span className="text-2xl">🐢</span>
+                      </div>
                       <div>
-                        <div className="font-semibold text-charcoal">TurtleTime</div>
-                        <div className="text-sm text-gray-500">Qty: 1</div>
+                        <div className="font-display font-semibold text-ink">TurtleTime</div>
+                        <div className="text-sm text-ink-muted">Qty: 1</div>
                       </div>
                     </div>
-                    <div className="text-lg font-bold text-charcoal">$49.00</div>
+                    <div className="font-display text-xl font-bold text-ink">$49.00</div>
                   </div>
                 </div>
 
@@ -192,7 +238,7 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             First Name
                           </label>
                           <input
@@ -201,12 +247,12 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.firstName}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="John"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             Last Name
                           </label>
                           <input
@@ -215,13 +261,13 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.lastName}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="Doe"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-ink mb-1.5">
                           Email
                         </label>
                         <input
@@ -229,12 +275,12 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                           placeholder="john@example.com"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-ink mb-1.5">
                           Shipping Address
                         </label>
                         <input
@@ -243,13 +289,13 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                           value={formData.address}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                           placeholder="123 Main St"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             City
                           </label>
                           <input
@@ -258,12 +304,12 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.city}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="San Francisco"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             ZIP Code
                           </label>
                           <input
@@ -272,7 +318,7 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.zip}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="94102"
                           />
                         </div>
@@ -282,7 +328,7 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                     // Step 2: Payment
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-ink mb-1.5">
                           Card Number
                         </label>
                         <input
@@ -291,13 +337,13 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                           value={formData.cardNumber}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                          className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                           placeholder="4242 4242 4242 4242"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             Expiry Date
                           </label>
                           <input
@@ -306,12 +352,12 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.expiry}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="MM/YY"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-ink mb-1.5">
                             CVC
                           </label>
                           <input
@@ -320,7 +366,7 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                             value={formData.cvc}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-turtle-500 focus:border-transparent"
+                            className="w-full px-4 py-3 bg-cream-50 border border-cream-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent transition-all font-body"
                             placeholder="123"
                           />
                         </div>
@@ -340,7 +386,7 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                     <button
                       type="button"
                       onClick={() => setCheckoutStep(1)}
-                      className="w-full mt-3 text-gray-500 hover:text-gray-700 text-sm"
+                      className="w-full mt-3 text-ink-muted hover:text-ink text-sm transition-colors"
                     >
                       ← Back to shipping
                     </button>
@@ -348,33 +394,40 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
                 </form>
 
                 {/* Trust indicators */}
-                <div className="px-6 pb-6 text-center text-sm text-gray-400">
-                  <span>🔒 Secure 256-bit SSL encryption</span>
+                <div className="px-6 pb-6 text-center text-sm text-ink-muted flex items-center justify-center gap-2">
+                  <span>🔒</span>
+                  <span>Secure 256-bit SSL encryption</span>
                 </div>
               </>
             ) : (
               // Success / Fake Door Reveal
-              <div className="p-8 text-center">
-                <div className="text-6xl mb-6">🐢💚</div>
-                <h3 className="font-display text-2xl font-bold text-charcoal mb-4">
+              <div className="p-10 text-center">
+                <div className="w-24 h-24 mx-auto mb-6 bg-sage-100 rounded-full flex items-center justify-center">
+                  <span className="text-5xl">🐢</span>
+                </div>
+
+                <h3 className="font-display text-2xl font-bold text-ink mb-4">
                   Thanks for Your Interest!
                 </h3>
-                <p className="text-gray-600 mb-6">
+
+                <p className="text-ink-muted mb-8 leading-relaxed">
                   We&apos;re so excited you want to join the TurtleTime community!
                   We&apos;re putting the finishing touches on production and aren&apos;t
                   quite ready to take orders yet.
                 </p>
-                <div className="bg-turtle-50 p-6 rounded-2xl mb-6">
-                  <p className="text-turtle-700 font-medium mb-2">
+
+                <div className="bg-sage-50 p-6 rounded-2xl mb-8">
+                  <p className="text-sage-700 font-display font-medium mb-2">
                     Be the first to know when we launch:
                   </p>
-                  <p className="text-charcoal">
+                  <p className="text-ink font-medium text-lg">
                     {email || 'your email'}
                   </p>
-                  <p className="text-sm text-gray-500 mt-2">
+                  <p className="text-sm text-ink-muted mt-3">
                     We&apos;ll send you an exclusive early-bird discount code.
                   </p>
                 </div>
+
                 <Button variant="secondary" onClick={resetModal}>
                   Back to Site
                 </Button>

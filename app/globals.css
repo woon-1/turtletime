@@ -3,50 +3,249 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 45, 52, 54;
-  --background-rgb: 255, 251, 245;
+  --foreground: #2D3032;
+  --background: #FBF8F3;
+  --sage-accent: #6a9a56;
+  --terra-accent: #e86b45;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-}
-
-/* Smooth scroll behavior */
+/* Base styles */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom utility classes */
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Grain texture overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Section grain */
+.section-grain {
+  position: relative;
+}
+
+.section-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Organic blob shapes */
+.blob-shape {
+  border-radius: 60% 40% 70% 30% / 40% 50% 50% 60%;
+  animation: blob 7s ease-in-out infinite;
+}
+
+.blob-shape-2 {
+  border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  animation: blob 7s ease-in-out infinite reverse;
+}
+
+@keyframes blob {
+  0%, 100% {
+    border-radius: 60% 40% 70% 30% / 40% 50% 50% 60%;
+  }
+  25% {
+    border-radius: 50% 50% 60% 40% / 30% 60% 40% 70%;
+  }
+  50% {
+    border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  }
+  75% {
+    border-radius: 70% 30% 50% 50% / 50% 30% 70% 50%;
+  }
+}
+
+/* Wavy dividers */
+.wavy-divider {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+}
+
+.wavy-divider svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Fade up on scroll */
+.fade-up-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5EFE6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4e3cd;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b4cfa8;
+}
+
+/* Selection highlight */
+::selection {
+  background: #d4e3cd;
+  color: #2f4228;
+}
+
+/* Custom utilities */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .bg-dots-pattern {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
 }
 
-/* Animation keyframes */
+/* Hand-drawn underline effect */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hand-underline::after {
+  content: '';
+  position: absolute;
+  left: -5%;
+  bottom: -4px;
+  width: 110%;
+  height: 8px;
+  background: currentColor;
+  opacity: 0.15;
+  border-radius: 50%;
+  transform: rotate(-1deg);
+}
+
+/* Soft card shadows */
+.card-soft {
+  box-shadow:
+    0 2px 8px rgba(45, 48, 50, 0.04),
+    0 8px 24px rgba(45, 48, 50, 0.08);
+}
+
+.card-soft:hover {
+  box-shadow:
+    0 4px 12px rgba(45, 48, 50, 0.06),
+    0 12px 32px rgba(45, 48, 50, 0.12);
+}
+
+/* Floating animations */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px) rotate(2deg);
   }
 }
 
-@keyframes pulse-soft {
+@keyframes float-delayed {
   0%, 100% {
-    opacity: 1;
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    opacity: 0.8;
+    transform: translateY(-10px) rotate(-1deg);
   }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+.animate-float-delayed {
+  animation: float-delayed 7s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* Squiggly line SVG animation */
+.squiggle-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-line 2s ease-out forwards;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Button hover glow */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-glow:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Turtle shell pattern */
+.shell-pattern {
+  background-image:
+    radial-gradient(ellipse 30px 20px at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 25px 18px at 60% 25%, rgba(255,255,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 28px 22px at 45% 55%, rgba(255,255,255,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 22px 16px at 70% 60%, rgba(255,255,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 20px 15px at 25% 70%, rgba(255,255,255,0.06) 0%, transparent 70%);
 }

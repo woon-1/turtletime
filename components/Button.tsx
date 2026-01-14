@@ -4,7 +4,7 @@ import React from 'react'
 
 interface ButtonProps {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   onClick?: () => void
   className?: string
@@ -19,18 +19,48 @@ export default function Button({
   className = '',
   type = 'button',
 }: ButtonProps) {
-  const baseStyles = 'font-semibold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95'
+  const baseStyles = `
+    font-display font-semibold rounded-full
+    transition-all duration-300 ease-out
+    transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    relative overflow-hidden btn-glow
+  `
 
   const variants = {
-    primary: 'bg-coral-500 hover:bg-coral-600 text-white shadow-lg hover:shadow-xl',
-    secondary: 'bg-turtle-500 hover:bg-turtle-600 text-white shadow-lg hover:shadow-xl',
-    outline: 'border-2 border-turtle-500 text-turtle-600 hover:bg-turtle-50',
+    primary: `
+      bg-gradient-to-br from-terra-400 via-terra-500 to-terra-600
+      text-white
+      shadow-lg shadow-terra-500/25
+      hover:shadow-xl hover:shadow-terra-500/30
+      focus:ring-terra-400
+    `,
+    secondary: `
+      bg-gradient-to-br from-sage-400 via-sage-500 to-sage-600
+      text-white
+      shadow-lg shadow-sage-500/25
+      hover:shadow-xl hover:shadow-sage-500/30
+      focus:ring-sage-400
+    `,
+    outline: `
+      border-2 border-sage-400
+      text-sage-600
+      hover:bg-sage-50
+      hover:border-sage-500
+      focus:ring-sage-400
+    `,
+    ghost: `
+      text-ink-light
+      hover:text-ink
+      hover:bg-cream-200
+      focus:ring-sage-300
+    `,
   }
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-5 py-2.5 text-sm',
+    md: 'px-7 py-3.5 text-base',
+    lg: 'px-9 py-4 text-lg tracking-wide',
   }
 
   return (
@@ -39,7 +69,9 @@ export default function Button({
       onClick={onClick}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
     >
-      {children}
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        {children}
+      </span>
     </button>
   )
 }
