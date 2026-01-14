@@ -2,6 +2,126 @@
 
 import React, { useState } from 'react'
 
+// Illustrated icon: Sound waves with bell
+const SoundWavesIcon = () => (
+  <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
+    {/* Bell body */}
+    <path
+      d="M16 6C12 6 9 9 9 13V18L7 22H25L23 18V13C23 9 20 6 16 6Z"
+      className="fill-sage-500"
+    />
+    {/* Bell clapper */}
+    <circle cx="16" cy="25" r="2.5" className="fill-sage-600" />
+    {/* Bell highlight */}
+    <ellipse cx="12" cy="12" rx="2" ry="3" className="fill-white opacity-30" />
+    {/* Sound waves */}
+    <path
+      d="M26 11C27.5 12.5 28 14.5 28 16.5"
+      stroke="#7a9e6c"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M24 9C26.5 11 28 14 28 17"
+      stroke="#7a9e6c"
+      strokeWidth="2"
+      strokeLinecap="round"
+      opacity="0.6"
+    />
+    <path
+      d="M6 11C4.5 12.5 4 14.5 4 16.5"
+      stroke="#7a9e6c"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M8 9C5.5 11 4 14 4 17"
+      stroke="#7a9e6c"
+      strokeWidth="2"
+      strokeLinecap="round"
+      opacity="0.6"
+    />
+  </svg>
+)
+
+// Illustrated icon: Moon with stars
+const MoonIcon = () => (
+  <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
+    {/* Moon crescent */}
+    <path
+      d="M22 16C22 21.5 17.5 26 12 26C10.5 26 9 25.7 7.7 25.1C10.3 27.5 13.9 29 18 29C25.2 29 31 23.2 31 16C31 8.8 25.2 3 18 3C13.9 3 10.3 4.5 7.7 6.9C9 6.3 10.5 6 12 6C17.5 6 22 10.5 22 16Z"
+      className="fill-terra-400"
+    />
+    {/* Moon highlight */}
+    <ellipse cx="15" cy="12" rx="3" ry="4" className="fill-white opacity-20" />
+    {/* Stars */}
+    <circle cx="6" cy="8" r="1.5" className="fill-terra-300" />
+    <circle cx="3" cy="16" r="1" className="fill-terra-300" />
+    <circle cx="8" cy="22" r="1.2" className="fill-terra-300" />
+    {/* Star sparkle */}
+    <path
+      d="M5 12L5.5 10.5L7 10L5.5 9.5L5 8L4.5 9.5L3 10L4.5 10.5L5 12Z"
+      className="fill-terra-200"
+    />
+  </svg>
+)
+
+// Illustrated icon: Shell with tap ripples
+const ShellTapIcon = () => (
+  <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
+    {/* Mini turtle shell */}
+    <ellipse cx="16" cy="18" rx="12" ry="8" className="fill-sage-400" />
+    <ellipse cx="16" cy="16" rx="9" ry="6" className="fill-sage-500" />
+    {/* Shell pattern */}
+    <path
+      d="M12 14L14 12L18 12L20 14L20 18L18 20L14 20L12 18Z"
+      className="fill-sage-600 opacity-50"
+    />
+    {/* Shell highlight */}
+    <ellipse cx="13" cy="14" rx="2" ry="1.5" className="fill-white opacity-30" />
+    {/* Tap ripples */}
+    <circle cx="16" cy="8" r="2" stroke="#7a9e6c" strokeWidth="1.5" fill="none" opacity="0.8" />
+    <circle cx="16" cy="8" r="4.5" stroke="#7a9e6c" strokeWidth="1.5" fill="none" opacity="0.5" />
+    <circle cx="16" cy="8" r="7" stroke="#7a9e6c" strokeWidth="1" fill="none" opacity="0.3" />
+    {/* Tap dot */}
+    <circle cx="16" cy="8" r="1" className="fill-sage-600" />
+  </svg>
+)
+
+// Illustrated icon: Shield with no-wifi
+const OfflineIcon = () => (
+  <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
+    {/* Shield shape */}
+    <path
+      d="M16 3L5 7V14C5 21 9.5 27 16 29C22.5 27 27 21 27 14V7L16 3Z"
+      className="fill-sage-400"
+    />
+    {/* Shield inner */}
+    <path
+      d="M16 5L7 8.5V14C7 19.8 10.8 25 16 27C21.2 25 25 19.8 25 14V8.5L16 5Z"
+      className="fill-sage-500"
+    />
+    {/* Shield highlight */}
+    <ellipse cx="11" cy="11" rx="3" ry="4" className="fill-white opacity-20" />
+    {/* WiFi symbol (crossed out) */}
+    <path
+      d="M12 17C13 16 14.5 15.5 16 15.5C17.5 15.5 19 16 20 17"
+      stroke="#FBF8F3"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <path
+      d="M10 14.5C11.5 13 13.7 12 16 12C18.3 12 20.5 13 22 14.5"
+      stroke="#FBF8F3"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <circle cx="16" cy="20" r="1.5" className="fill-cream-50" />
+    {/* Cross-out line */}
+    <line x1="11" y1="22" x2="21" y2="11" stroke="#e07a5f" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+)
+
 // Feature card component
 const FeatureCard = ({
   icon,
@@ -89,22 +209,22 @@ export default function Features() {
 
   const features = [
     {
-      icon: <span className="text-2xl">🔊</span>,
+      icon: <SoundWavesIcon />,
       title: 'Gentle Wake Sounds',
       description: 'Choose from soft nature sounds, gentle chimes, or a classic alarm. Wake up peacefully.',
     },
     {
-      icon: <span className="text-2xl">🌙</span>,
+      icon: <MoonIcon />,
       title: 'Soft Night Light',
       description: 'A warm amber glow for those middle-of-the-night moments. No harsh blue light.',
     },
     {
-      icon: <span className="text-2xl">👆</span>,
+      icon: <ShellTapIcon />,
       title: 'Shell Snooze',
       description: "We're realistic — everyone needs a snooze button. Tap the shell for 9 more minutes.",
     },
     {
-      icon: <span className="text-2xl">🔒</span>,
+      icon: <OfflineIcon />,
       title: 'Completely Offline',
       description: 'No WiFi, no Bluetooth, no data collection. Privacy by design.',
     },
