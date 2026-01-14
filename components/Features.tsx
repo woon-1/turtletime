@@ -88,37 +88,30 @@ const ShellTapIcon = () => (
   </svg>
 )
 
-// Illustrated icon: Shield with no-wifi
-const OfflineIcon = () => (
+// Illustrated icon: Phone with lock/brick
+const PhoneLockIcon = () => (
   <svg viewBox="0 0 32 32" className="w-7 h-7" fill="none">
-    {/* Shield shape */}
+    {/* Phone body */}
+    <rect x="9" y="3" width="14" height="26" rx="3" className="fill-sage-400" />
+    <rect x="10" y="5" width="12" height="20" rx="1" className="fill-sage-600" />
+    {/* Phone highlight */}
+    <rect x="11" y="6" width="4" height="6" rx="1" className="fill-white opacity-20" />
+    {/* Lock icon on screen */}
+    <rect x="13" y="12" width="6" height="5" rx="1" className="fill-terra-400" />
     <path
-      d="M16 3L5 7V14C5 21 9.5 27 16 29C22.5 27 27 21 27 14V7L16 3Z"
-      className="fill-sage-400"
-    />
-    {/* Shield inner */}
-    <path
-      d="M16 5L7 8.5V14C7 19.8 10.8 25 16 27C21.2 25 25 19.8 25 14V8.5L16 5Z"
-      className="fill-sage-500"
-    />
-    {/* Shield highlight */}
-    <ellipse cx="11" cy="11" rx="3" ry="4" className="fill-white opacity-20" />
-    {/* WiFi symbol (crossed out) */}
-    <path
-      d="M12 17C13 16 14.5 15.5 16 15.5C17.5 15.5 19 16 20 17"
-      stroke="#FBF8F3"
+      d="M14.5 12V10.5C14.5 9.7 15.2 9 16 9C16.8 9 17.5 9.7 17.5 10.5V12"
+      stroke="#e07a5f"
       strokeWidth="1.5"
       strokeLinecap="round"
     />
-    <path
-      d="M10 14.5C11.5 13 13.7 12 16 12C18.3 12 20.5 13 22 14.5"
-      stroke="#FBF8F3"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-    <circle cx="16" cy="20" r="1.5" className="fill-cream-50" />
-    {/* Cross-out line */}
-    <line x1="11" y1="22" x2="21" y2="11" stroke="#e07a5f" strokeWidth="2" strokeLinecap="round" />
+    {/* Lock keyhole */}
+    <circle cx="16" cy="14.5" r="0.8" className="fill-cream-50" />
+    {/* Home button */}
+    <circle cx="16" cy="27" r="1.5" className="fill-sage-300" />
+    {/* "Z" sleep symbols */}
+    <text x="23" y="10" className="fill-sage-300 text-[6px] font-display">z</text>
+    <text x="25" y="7" className="fill-sage-300 text-[7px] font-display">z</text>
+    <text x="27" y="4" className="fill-sage-300 text-[8px] font-display">z</text>
   </svg>
 )
 
@@ -224,9 +217,9 @@ export default function Features() {
       description: "We're realistic — everyone needs a snooze button. Tap the shell for 9 more minutes.",
     },
     {
-      icon: <OfflineIcon />,
-      title: 'Completely Offline',
-      description: 'No WiFi, no Bluetooth, no data collection. Privacy by design.',
+      icon: <PhoneLockIcon />,
+      title: 'Bricks Your Phone',
+      description: 'Pair with any app blocker to lock your phone until TurtleTime says it\'s morning.',
     },
   ]
 
