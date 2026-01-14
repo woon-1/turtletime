@@ -57,18 +57,7 @@ const TurtleIllustration = () => (
     {/* Clock display on shell */}
     <rect x="80" y="95" width="40" height="25" rx="4" className="fill-cream-100 opacity-90" />
     <text x="100" y="113" textAnchor="middle" className="fill-ink text-[12px] font-display font-bold">7:00</text>
-
-    {/* Decorative stars/sparkles */}
-    <g className="animate-pulse">
-      <path d="M50 60 L52 65 L57 65 L53 69 L55 74 L50 71 L45 74 L47 69 L43 65 L48 65 Z" className="fill-terra-300" />
-      <path d="M160 55 L161 58 L164 58 L162 60 L163 63 L160 61 L157 63 L158 60 L156 58 L159 58 Z" className="fill-terra-300" />
-    </g>
   </svg>
-)
-
-// Decorative blob shapes
-const BlobDecoration = ({ className }: { className: string }) => (
-  <div className={`absolute blob-shape ${className}`} />
 )
 
 // Wavy line decoration
@@ -84,13 +73,8 @@ const WavyLine = () => (
 export default function Hero({ onPreOrderClick }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-8 pb-32 overflow-hidden bg-gradient-to-b from-cream-50 via-cream to-sage-50">
-      {/* Background decorative elements */}
-      <BlobDecoration className="w-96 h-96 bg-sage-100/60 -top-20 -left-20" />
-      <BlobDecoration className="w-72 h-72 bg-terra-100/40 top-40 -right-10" />
-      <BlobDecoration className="w-64 h-64 bg-sage-200/30 bottom-40 left-1/4" />
-
-      {/* Dots pattern overlay */}
-      <div className="absolute inset-0 bg-dots-pattern text-sage-200 opacity-30" />
+      {/* Single background blob */}
+      <div className="absolute w-96 h-96 bg-sage-100/50 -top-20 -left-20 blob-shape" />
 
       <div className="relative max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -133,19 +117,10 @@ export default function Hero({ onPreOrderClick }: HeroProps) {
               awake and ready.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="primary" size="lg" onClick={onPreOrderClick}>
-                Pre-order Now — $49
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                See How It Works
-              </Button>
-            </div>
+            {/* CTA Button */}
+            <Button variant="primary" size="lg" onClick={onPreOrderClick}>
+              Pre-order Now — $49
+            </Button>
 
             {/* Trust line */}
             <div className="mt-6 flex items-center gap-6 justify-center lg:justify-start text-sm text-ink-muted">
@@ -173,25 +148,6 @@ export default function Hero({ onPreOrderClick }: HeroProps) {
               {/* Main turtle illustration */}
               <div className="relative animate-float">
                 <TurtleIllustration />
-              </div>
-
-              {/* Floating decorative elements */}
-              <div className="absolute -top-4 right-8 animate-float-delayed">
-                <div className="w-12 h-12 bg-terra-200 blob-shape flex items-center justify-center">
-                  <span className="text-xl">✨</span>
-                </div>
-              </div>
-
-              <div className="absolute bottom-12 -left-4 animate-float" style={{ animationDelay: '0.5s' }}>
-                <div className="w-10 h-10 bg-sage-200 blob-shape-2 flex items-center justify-center">
-                  <span className="text-lg">🌿</span>
-                </div>
-              </div>
-
-              <div className="absolute top-1/3 -right-8 animate-float" style={{ animationDelay: '1s' }}>
-                <div className="w-8 h-8 bg-cream-200 rounded-full flex items-center justify-center shadow-sm">
-                  <span className="text-sm">☀️</span>
-                </div>
               </div>
             </div>
           </div>

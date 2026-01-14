@@ -29,21 +29,39 @@ const TrustBadge = ({ icon, text }: { icon: string; text: string }) => (
   </div>
 )
 
-// Mini turtle for pricing card
-const MiniTurtle = () => (
-  <svg viewBox="0 0 100 80" className="w-24 h-20" fill="none">
-    <ellipse cx="50" cy="45" rx="35" ry="25" className="fill-sage-400" />
-    <ellipse cx="50" cy="42" rx="28" ry="20" className="fill-sage-500" />
-    <ellipse cx="42" cy="38" rx="8" ry="5" className="fill-white opacity-20" />
-    <ellipse cx="78" cy="42" rx="12" ry="10" className="fill-sage-300" />
-    <circle cx="84" cy="39" r="3" className="fill-ink" />
-    <circle cx="85" cy="38" r="1" className="fill-white" />
-    <ellipse cx="82" cy="46" rx="3" ry="2" className="fill-terra-300 opacity-40" />
-    <path d="M80 47 Q84 50 88 48" stroke="#2D3032" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-    <ellipse cx="70" cy="60" rx="7" ry="4" className="fill-sage-300" transform="rotate(-10 70 60)" />
-    <ellipse cx="30" cy="58" rx="6" ry="4" className="fill-sage-300" transform="rotate(10 30 58)" />
-    <ellipse cx="22" cy="45" rx="5" ry="3" className="fill-sage-300" />
-  </svg>
+// Testimonial component
+const Testimonial = () => (
+  <div className="bg-white rounded-2xl p-6 card-soft max-w-md mx-auto mb-8">
+    <div className="flex gap-1 mb-3">
+      {[...Array(5)].map((_, i) => (
+        <svg key={i} className="w-4 h-4 text-terra-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+    <p className="text-ink-light text-sm leading-relaxed mb-3">
+      &ldquo;I used to lose 30+ minutes every morning to Instagram. TurtleTime helped me take that time back. Now I actually eat breakfast.&rdquo;
+    </p>
+    <p className="text-ink-muted text-sm font-medium">— Sarah K., Early Adopter</p>
+  </div>
+)
+
+// Stats bar component
+const StatsBar = () => (
+  <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10">
+    <div className="text-center">
+      <div className="font-display text-2xl font-bold text-ink">40%</div>
+      <div className="text-xs text-ink-muted">Less morning stress</div>
+    </div>
+    <div className="text-center">
+      <div className="font-display text-2xl font-bold text-ink">25min</div>
+      <div className="text-xs text-ink-muted">Saved each day</div>
+    </div>
+    <div className="text-center">
+      <div className="font-display text-2xl font-bold text-ink">89%</div>
+      <div className="text-xs text-ink-muted">Recommend to friends</div>
+    </div>
+  </div>
 )
 
 export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: PreOrderProps) {
@@ -106,44 +124,27 @@ export default function PreOrder({ isModalOpen, onOpenModal, onCloseModal }: Pre
   return (
     <>
       {/* Pre-order Section */}
-      <section id="preorder" className="relative py-24 px-4 bg-gradient-to-b from-cream-100 via-cream-50 to-sage-50 overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute top-20 left-0 w-72 h-72 bg-sage-100 rounded-full opacity-40 blur-3xl" />
-        <div className="absolute bottom-20 right-0 w-64 h-64 bg-terra-50 rounded-full opacity-30 blur-3xl" />
-
+      <section id="preorder" className="relative py-20 px-4 bg-gradient-to-b from-cream-100 via-cream-50 to-sage-50 overflow-hidden">
         <div className="relative max-w-4xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-terra-100 text-terra-700 rounded-full text-sm font-medium">
-            <span>🎉</span>
-            <span>Limited Early Bird Pricing</span>
-          </span>
-
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink mb-6">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink mb-4">
             Pre-order{' '}
-            <span className="relative inline-block">
-              <span className="text-sage-600">TurtleTime</span>
-              <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
-                <path d="M0,4 Q50,0 100,4 T200,4" stroke="#b4cfa8" strokeWidth="3" fill="none" />
-              </svg>
-            </span>
+            <span className="text-sage-600">TurtleTime</span>
             {' '}Today
           </h2>
 
-          <p className="text-lg text-ink-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg text-ink-muted max-w-xl mx-auto mb-8">
             Be among the first to experience mornings without the scroll.
-            Pre-order now and save 20% off retail.
           </p>
 
+          {/* Testimonial */}
+          <Testimonial />
+
+          {/* Stats Bar */}
+          <StatsBar />
+
           {/* Pricing Card */}
-          <div className="relative bg-white rounded-[2rem] p-8 sm:p-10 card-soft max-w-md mx-auto">
-            {/* Decorative corner accent */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-sage-100 blob-shape opacity-60" />
-
-            {/* Mini turtle illustration */}
-            <div className="flex justify-center mb-4">
-              <MiniTurtle />
-            </div>
-
-            <h3 className="font-display text-2xl font-bold text-ink mb-2">
+          <div className="relative bg-white rounded-[2rem] p-8 card-soft max-w-md mx-auto">
+            <h3 className="font-display text-xl font-bold text-ink mb-2">
               TurtleTime Alarm Clock
             </h3>
 
