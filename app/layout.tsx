@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Comfortaa, Nunito } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 const comfortaa = Comfortaa({
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="en" className={`${comfortaa.variable} ${nunito.variable}`}>
       <body className="font-body antialiased bg-cream text-ink overflow-x-hidden">
         {children}
+        <Analytics />
       </body>
     </html>
   )
